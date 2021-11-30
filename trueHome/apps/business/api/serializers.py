@@ -21,11 +21,20 @@ class PropertySerializer(serializers.ModelSerializer):
         model = PropertyModel
         fields = "__all__"
 
+
 class ActivitySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ActivityModel
         fields = "__all__"
+
+
+class ReAgendActivitySerializer(serializers.Serializer):
+    """
+    Serializer para reagendar actividad
+    """
+    activity_id = serializers.IntegerField()
+    schedule = serializers.DateTimeField()
 
 
 class SurveySerializer(serializers.ModelSerializer):
