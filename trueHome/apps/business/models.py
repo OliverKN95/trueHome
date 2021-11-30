@@ -20,10 +20,8 @@ class PropertyModel(models.Model):
         max_length=100, verbose_name=_("Description"))
     created_at = models.DateTimeField(
         auto_now_add=True, verbose_name=_("Created at"))
-    updated_at = models.DateTimeField(
-        auto_now_add=True, verbose_name=_("Updated at"))
-    disabled_at = models.DateTimeField(null=False,
-                                       auto_now_add=True, verbose_name=_("Disabled at"))
+    updated_at = models.DateTimeField(null=False, blank=False, verbose_name=_("Updated at"))
+    disabled_at = models.DateTimeField(null=True, blank=True, verbose_name=_("Disabled at"))
     status = models.IntegerField(
         choices=STATUS_CHOICES, default=1, verbose_name=_("Status"))
 
@@ -48,14 +46,13 @@ class ActivityModel(models.Model):
     property = models.ForeignKey(
         PropertyModel, verbose_name=_("Property"), on_delete=models.CASCADE)
     schedule = models.DateTimeField(
-        auto_now_add=True, verbose_name=_("Schedule"))
+        auto_now_add=False, verbose_name=_("Schedule"))
     title = models.CharField(max_length=100, verbose_name=_("Title"))
     description = models.CharField(
         max_length=100, verbose_name=_("Description"))
     created_at = models.DateTimeField(
         auto_now_add=True, verbose_name=_("Created at"))
-    updated_at = models.DateTimeField(
-        auto_now_add=True, verbose_name=_("Updated at"))
+    updated_at = models.DateTimeField(null=False, blank=False, verbose_name=_("Updated at"))
     status = models.IntegerField(
         choices=STATUS_CHOICES, default=1, verbose_name=_("Status"))
 
@@ -76,6 +73,7 @@ class SurveyModel(models.Model):
         (1, _("active")),
         (2, _("disabled")),
         (3, _("done")),
+        (4, _("canceled")),
     )
     activity = models.ForeignKey(
         ActivityModel, verbose_name=_("Activity"), on_delete=models.CASCADE)
@@ -87,5 +85,5 @@ class SurveyModel(models.Model):
         return self.activity.id + "-" + self.title
 
     class Meta:
-        verbose_name = _("Activity")
-        verbose_name_plural = _("Activities")
+        verbose_name = _("Survey")
+        verbose_name_plural = _("Surveys")
