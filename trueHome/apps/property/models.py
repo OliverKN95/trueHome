@@ -21,7 +21,7 @@ class PropertyModel(models.Model):
     created_at = models.DateTimeField(
         auto_now_add=True, verbose_name=_("Created at"))
     updated_at = models.DateTimeField(
-        null=True, blank=True, verbose_name=_("Updated at"))
+        auto_now=True, verbose_name=_("Updated at"))
     disabled_at = models.DateTimeField(
         null=True, blank=True, verbose_name=_("Disabled at"))
     status = models.IntegerField(
