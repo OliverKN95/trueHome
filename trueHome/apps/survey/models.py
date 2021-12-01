@@ -12,7 +12,7 @@ class SurveyModel(models.Model):
 
     activity = models.OneToOneField(
         ActivityModel, verbose_name=_("Activity"), on_delete=models.CASCADE)
-    description = models.JSONField(verbose_name=_("Answers"))
+    answers = models.JSONField(verbose_name=_("Answers"))
     created_at = models.DateTimeField(
         auto_now_add=True, verbose_name=_("Created at"))
 
