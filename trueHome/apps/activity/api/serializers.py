@@ -1,3 +1,4 @@
+from django.urls import reverse
 from rest_framework import serializers
 from django.utils.translation import ugettext_lazy as _
 from trueHome.apps.activity.models import ActivityModel
@@ -16,9 +17,11 @@ class ActivitySerializer(serializers.ModelSerializer):
         representation = super(ActivitySerializer, self).to_representation(instance)
         condition = validate_condition(instance)
         survey = get_survey_by_activity_id(instance.id)
+        survey_data =  SurveySerializer(survey, context=self.context).data
+        survey_data['url'] =  self.context['request']._current_scheme_host + f'/survey/survey-preview/{survey.id}/'
         representation['property'] = PropertySerializer(instance.property).data
         representation['condition'] = condition
-        representation['survey'] = SurveySerializer(survey, context=self.context).data
+        representation['survey'] = survey_data
         return representation
 
 
