@@ -18,7 +18,10 @@ class ActivitySerializer(serializers.ModelSerializer):
         condition = validate_condition(instance)
         survey = get_survey_by_activity_id(instance.id)
         survey_data =  SurveySerializer(survey, context=self.context).data
-        survey_data['url'] =  self.context['request']._current_scheme_host + f'/survey/survey-preview/{survey.id}/'
+        if survey:
+            survey_data['url'] =  self.context['request']._current_scheme_host + f'/survey/survey-preview/{survey.id}/'
+        else:
+            survey_data['url'] =  None
         representation['property'] = PropertySerializer(instance.property).data
         representation['condition'] = condition
         representation['survey'] = survey_data

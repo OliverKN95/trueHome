@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'trueHome.apps.activity',
     'trueHome.apps.property',
     'trueHome.apps.survey',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
