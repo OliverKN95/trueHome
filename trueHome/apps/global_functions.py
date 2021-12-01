@@ -1,7 +1,8 @@
 
 
 import datetime
-from trueHome.apps.business.models import ActivityModel, SurveyModel
+from trueHome.apps.activity.models import ActivityModel
+from trueHome.apps.survey.models import SurveyModel
 
 
 def validate_property_date_range(property, date):

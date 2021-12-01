@@ -1,26 +1,9 @@
 from rest_framework import serializers
 from django.utils.translation import ugettext_lazy as _
-from trueHome.apps.business.models import ActivityModel, PropertyModel, SurveyModel
+from trueHome.apps.activity.models import ActivityModel
+from trueHome.apps.property.api.serializers import PropertySerializer
+from trueHome.apps.survey.api.serializers import SurveySerializer
 from trueHome.apps.global_functions import validate_condition, get_survey_by_activity_id
-
-# class CompanySerializer(serializers.ModelSerializer):
-
-#     class Meta:
-#         model = Company
-#         fields = "__all__"
-
-#     def to_representation(self, instance):
-#         representation = super(CompanySerializer, self).to_representation(instance)
-#         representation['owner'] = UserSerializer(instance.owner).data
-
-#         return representation
-
-
-class PropertySerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = PropertyModel
-        fields = "__all__"
 
 
 class ActivitySerializer(serializers.ModelSerializer):
@@ -51,10 +34,3 @@ class CancelActivitySerializer(serializers.Serializer):
     Serializer para cancelar actividad
     """
     activity_id = serializers.IntegerField()
-
-
-class SurveySerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = SurveyModel
-        fields = "__all__"

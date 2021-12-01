@@ -21,5 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/doc/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('api-auth/', include('rest_framework.urls')),
-    path('business/', include('trueHome.apps.business.urls')),
+    path('activity/', include('trueHome.apps.activity.urls')),
+    path('property/', include('trueHome.apps.property.urls')),
+    path('survey/', include('trueHome.apps.survey.urls')),
 ]

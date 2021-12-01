@@ -6,21 +6,13 @@ from rest_framework import viewsets, status
 from rest_framework.views import APIView
 from rest_framework.generics import GenericAPIView
 from django.utils.translation import ugettext as _
-from trueHome.apps.business.api.serializers import PropertySerializer, ActivitySerializer, SurveySerializer, ReAgendActivitySerializer, CancelActivitySerializer
-from trueHome.apps.business.models import PropertyModel, ActivityModel, SurveyModel
-from trueHome.apps.business.api.filters import PropertyFilter, ActivityFilter, SurveyFilter
+from trueHome.apps.activity.api.serializers import ActivitySerializer, ReAgendActivitySerializer, CancelActivitySerializer
+from trueHome.apps.activity.models import ActivityModel
+from trueHome.apps.activity.api.filters import ActivityFilter
 from trueHome.apps.global_functions import validate_property_date_range
 from django.shortcuts import get_object_or_404
 
 # from rest_framework.permissions import AllowAny
-
-
-class PropertyViewSet(viewsets.ModelViewSet):
-    serializer_class = PropertySerializer
-    queryset = PropertyModel.objects.all()
-    filterset_class = PropertyFilter
-    authentication_classes = []
-    permission_classes = []
 
 
 class ActivityViewSet(viewsets.ModelViewSet):
@@ -64,11 +56,11 @@ class ActivityViewSet(viewsets.ModelViewSet):
             return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def list(self, request, *args, **kwargs):
-        
+
         init_date = request.query_params.get('init_date', None)
         end_date = request.query_params.get('end_date', None)
         activity_status = request.query_params.get('status', None)
-        
+
         if init_date and end_date and status:
             activities_list = self.queryset.filter(
                 schedule__gte=init_date,
@@ -147,11 +139,3 @@ class CancelActivityView(GenericAPIView):
                 return Response(data=serializer.data, status=status.HTTP_200_OK)
         else:
             return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-class SurveyViewSet(viewsets.ModelViewSet):
-    serializer_class = SurveySerializer
-    queryset = SurveyModel.objects.all()
-    filterset_class = SurveyFilter
-    authentication_classes = []
-    permission_classes = []

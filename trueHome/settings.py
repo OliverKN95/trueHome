@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'drf_yasg',
     'rest_framework',
-    'trueHome.apps.business',
+    'trueHome.apps.activity',
+    'trueHome.apps.property',
+    'trueHome.apps.survey',
 ]
 
 MIDDLEWARE = [

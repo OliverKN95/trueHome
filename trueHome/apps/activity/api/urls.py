@@ -1,13 +1,11 @@
 from django.urls import path
-from trueHome.apps.business.api.views import PropertyViewSet, ActivityViewSet, SurveyViewSet, ReAgendActivityView, CancelActivityView
+from trueHome.apps.activity.api.views import ActivityViewSet, ReAgendActivityView, CancelActivityView
 from rest_framework import routers
 
-app_name = 'business'
+app_name = 'activity'
 
 router = routers.SimpleRouter()
-router.register(r'property', PropertyViewSet)
 router.register(r'activity', ActivityViewSet)
-router.register(r'survey', SurveyViewSet)
 
 urlpatterns = [
     path('re_agend_activity/', ReAgendActivityView.as_view()),
