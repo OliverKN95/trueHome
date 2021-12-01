@@ -1,1 +1,1 @@
-web: gunicorn trueHome.wsgi
+web: gunicorn trueHome.wsgi --log-file -
